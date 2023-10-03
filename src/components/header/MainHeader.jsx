@@ -4,6 +4,7 @@ import MenuIcon from "@/components/icons/MenuIcon";
 import CartIcon from "@/components/icons/CartIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
 import { useState } from "react";
+import NavLinkHeader from "@/components/header/NavLinkHeader";
 
 const MainHeader = () => {
     const [navClass, setNavClass] = useState(
@@ -22,33 +23,39 @@ const MainHeader = () => {
     };
 
     return (
-        <header className=" container mx-auto bg-slate-200 flex items-center px-4 gap-4 py-8 ">
-            <button className="md:hidden" onClick={handleOpenMenu}>
-                <MenuIcon />
-            </button>
-            <img
-                src={LogoSneakes}
-                alt="Logo Sneakers"
-                className="mr-auto md:mr-0 mb-1"
-            />
+        <>
+            <header className=" container p-4 md:p-0 mx-auto bg-white-primary flex items-center py-4 gap-8 md:py-0 ">
+                <button className="md:hidden" onClick={handleOpenMenu}>
+                    <MenuIcon />
+                </button>
+                <img
+                    src={LogoSneakes}
+                    alt="Logo Sneakers"
+                    className="mr-auto md:mr-0 mb-1"
+                />
 
-            <nav className={navClass}>
-                <button className="mb-12 md:hidden" onClick={handleCloseMenu}>
-                    <CloseIcon />
-                </button>
-                <a href="#">Collections</a>
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
-            <div className="flex gap-4">
-                <button>
-                    <CartIcon />
-                </button>
-                <img src={AvatarImage} alt="" className="w-10" />
-            </div>
-        </header>
+                <nav className={navClass}>
+                    <button
+                        className="mb-12 md:hidden"
+                        onClick={handleCloseMenu}
+                    >
+                        <CloseIcon />
+                    </button>
+                    <NavLinkHeader text="Collections" />
+                    <NavLinkHeader text="Men" />
+                    <NavLinkHeader text="Women" />
+                    <NavLinkHeader text="About" />
+                    <NavLinkHeader text="Contact" />
+                </nav>
+                <div className="flex gap-4">
+                    <button>
+                        <CartIcon />
+                    </button>
+                    <img src={AvatarImage} alt="" className="w-10" />
+                </div>
+            </header>
+            <span className="hidden container mx-auto md:block h-[1px] w-full bg-gray-500"></span>
+        </>
     );
 };
 
