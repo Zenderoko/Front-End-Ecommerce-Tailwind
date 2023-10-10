@@ -13,7 +13,7 @@ const MainHeader = () => {
 
     const handleOpenMenu = () => {
         setNavClass(
-            "absolute  top-0  left-0 h-full  font-bold p-8 bg-gray-400 w-4/5 flex flex-col gap-y-[21px] md:flex-row md:flex md:gap-4 md:static md:p-0  md:mr-auto"
+            "absolute  top-0  left-0 h-full  font-bold p-8 bg-white-primary w-4/5 flex flex-col gap-y-[21px] md:flex-row md:flex md:gap-4 md:static md:p-0  md:mr-auto z-10"
         );
     };
     const handleCloseMenu = () => {
@@ -54,7 +54,7 @@ const MainHeader = () => {
                     <img src={AvatarImage} alt="" className="w-10" />
                 </div>
             </header>
-            <span className="hidden container mx-auto md:block h-[1px] w-full bg-gray-500"></span>
+            <span className="hidden container mx-auto md:block h-[1px] w-full bg-white-primary"></span>
         </>
     );
 };

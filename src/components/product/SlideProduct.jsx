@@ -24,11 +24,11 @@ export default () => {
 
     return (
         <section className="grid md:grid-cols-4 md:gap-4">
-            <div className="col-span-4 relative">
+            <div className="col-span-4 relative ">
                 <img
                     src={ARRAY_IMGS[index]}
-                    alt=""
-                    className="aspect-[16/12]"
+                    alt="Slide-Product"
+                    className="aspect-[4/3] rounded-lg "
                 />
 
                 <div className="absolute left-0 top-1/2 -translate-y-1/2 flex justify-between w-full px-4">
@@ -50,7 +50,11 @@ export default () => {
             <img src={imgProductSmall1} alt="" className="hidden md:block" />
             <img src={imgProductSmall2} alt="" className="hidden md:block" />
             <img src={imgProductSmall3} alt="" className="hidden md:block" />
-            <img src={imgProductSmall4} alt="" className="hidden md:block" />
+            <img
+                src={imgProductSmall4}
+                alt=""
+                className="hidden md:block cursor-pointer"
+            />
         </section>
     );
 };
