@@ -1,62 +1,74 @@
+import { useState, useContext } from "react";
+
 import LogoSneakes from "@/assets/images/logo.svg";
 import AvatarImage from "@/assets/images/image-avatar.png";
+
 import MenuIcon from "@/components/icons/MenuIcon";
 import CartIcon from "@/components/icons/CartIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
-import { useState } from "react";
 import NavLinkHeader from "@/components/header/NavLinkHeader";
 
+import CartDetailsHeader from "@/components/header/CartDetailsHeader";
+import { useCartDetails } from "@/context/useCartDetails";
+
 const MainHeader = () => {
-    const [navClass, setNavClass] = useState(
-        "hidden font-bold md:h-auto md:flex-row md:flex md:gap-4 md:static md:p-0  md:mr-auto"
-    );
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenDetailsCart, setOpenDetailsCart] = useState(false);
 
-    const handleOpenMenu = () => {
-        setNavClass(
-            "absolute  top-0  left-0 h-full  font-bold p-8 bg-white-primary w-4/5 flex flex-col gap-y-[21px] md:flex-row md:flex md:gap-4 md:static md:p-0  md:mr-auto z-10"
-        );
-    };
-    const handleCloseMenu = () => {
-        setNavClass(
-            "hidden font-bold md:h-auto md:flex-row md:flex md:gap-4 md:static md:p-0  md:mr-auto"
-        );
-    };
+  const handleOpenMenu = () => {
+    setIsOpenMenu(true);
+  };
+  const handleCloseMenu = () => {
+    setIsOpenMenu(false);
+  };
 
-    return (
-        <>
-            <header className=" container p-4 md:p-0 mx-auto bg-white-primary flex items-center py-4 gap-8 md:py-0 ">
-                <button className="md:hidden" onClick={handleOpenMenu}>
-                    <MenuIcon />
-                </button>
-                <img
-                    src={LogoSneakes}
-                    alt="Logo Sneakers"
-                    className="mr-auto md:mr-0 mb-1"
-                />
+  const { totalQuantityProduct } = useContext(useCartDetails);
 
-                <nav className={navClass}>
-                    <button
-                        className="mb-12 md:hidden"
-                        onClick={handleCloseMenu}
-                    >
-                        <CloseIcon />
-                    </button>
-                    <NavLinkHeader text="Collections" />
-                    <NavLinkHeader text="Men" />
-                    <NavLinkHeader text="Women" />
-                    <NavLinkHeader text="About" />
-                    <NavLinkHeader text="Contact" />
-                </nav>
-                <div className="flex gap-4">
-                    <button>
-                        <CartIcon />
-                    </button>
-                    <img src={AvatarImage} alt="" className="w-10" />
-                </div>
-            </header>
-            <span className="hidden container mx-auto md:block h-[1px] w-full bg-white-primary"></span>
-        </>
-    );
+  return (
+    <>
+      <header className=" bg-white-primary container relative mx-auto flex items-center gap-8 p-4 py-4 md:p-0 md:py-0">
+        <button className="md:hidden" onClick={handleOpenMenu}>
+          <MenuIcon />
+        </button>
+        <img
+          src={LogoSneakes}
+          alt="Logo Sneakers"
+          className="mb-1 mr-auto md:mr-0"
+        />
+
+        <nav
+          className={`font-bold md:static md:mr-auto md:flex md:h-auto md:flex-row md:gap-4  md:p-0 ${
+            isOpenMenu
+              ? "bg-white-primary absolute left-0 top-0 z-10 flex h-full w-4/5 flex-col gap-y-[21px] p-8"
+              : "hidden"
+          }`}
+        >
+          <button className="mb-12 md:hidden" onClick={handleCloseMenu}>
+            <CloseIcon />
+          </button>
+          <NavLinkHeader text="Collections" />
+          <NavLinkHeader text="Men" />
+          <NavLinkHeader text="Women" />
+          <NavLinkHeader text="About" />
+          <NavLinkHeader text="Contact" />
+        </nav>
+        <div className="flex gap-4">
+          <button
+            onClick={() => setOpenDetailsCart(!isOpenDetailsCart)}
+            className="relative"
+          >
+            <CartIcon />
+            <span className="bg-orange-primary absolute right-0 top-0 translate-x-1 rounded-full px-1 text-xs font-bold text-white ">
+              {totalQuantityProduct}
+            </span>
+          </button>
+          <img src={AvatarImage} alt="" className="w-10" />
+          {isOpenDetailsCart && <CartDetailsHeader />}
+        </div>
+      </header>
+      <span className="bg-white-primary container mx-auto hidden h-[1px] w-full md:block"></span>
+    </>
+  );
 };
 
 export default MainHeader;
